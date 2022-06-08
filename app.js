@@ -14,6 +14,7 @@ const chalk               = require('chalk'),
       hbs                 = require('hbs'),
       logger              = require('morgan'),
       bodyParser          = require('body-parser'),
+      cors                = require('cors'),
       session             = require('express-session'),
       yargs               = require('yargs/yargs'),
       xmlFormat           = require('xml-formatter'),
@@ -457,9 +458,8 @@ function _runServer(argv) {
                                   {bold SAMLResponse} =>`
                               ));
 
-                              console.log(prettyPrintXml(response.toString(), 4));
-
-                              res.render('samlresponse', {
+                              res.json({
+                                success: true,
                                 AcsUrl: opts.postUrl,
                                 SAMLResponse: response.toString('base64'),
                                 RelayState: opts.RelayState
@@ -524,7 +524,9 @@ function _runServer(argv) {
         return req.path.startsWith('/bower_components') || req.path.startsWith('/css')
       }
   }));
+  app.use(cors());
   app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(session({
     secret: 'The universe works on a math equation that never even ever really ends in the end',

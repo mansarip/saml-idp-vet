@@ -1,3 +1,6 @@
+# Forked
+
+This is a forked version of `saml-idp`.
 # Introduction
 
 This app provides a simple SAML Identity Provider (IdP) to test SAML 2.0 Service Providers (SPs) with the [SAML 2.0 Web Browser SSO Profile](http://en.wikipedia.org/wiki/SAML_2.0#Web_Browser_SSO_Profile) or the Single Logout Profile.
